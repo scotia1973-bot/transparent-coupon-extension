@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transparent Coupon</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="light-mode">
+  <div id="app">
+    <!-- Header -->
+    <header id="header">
+      <div class="header-left">
+        <div class="logo">
+          <div class="logo-icon">$</div>
+          <div class="logo-text">
+            <span class="logo-title">Transparent Coupon</span>
+            <span class="logo-subtitle">Honest Deals</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="savings-counter" id="savingsCounter" title="Total savings found by our users">
+          <span class="savings-icon">💰</span>
+          <span id="savingsAmount">$0</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
+          <span class="theme-icon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div id="content">
+      <!-- Loading State -->
+      <div id="loadingState" class="state-container">
+        <div class="spinner"></div>
+        <p>Finding deals for you...</p>
+      </div>
+
+      <!-- Not on Shopping Site -->
+      <div id="browsingState" class="state-container" style="display: none;">
+        <div class="state-icon">🛍️</div>
+        <h2>Browse the Web, Save Money</h2>
+        <p>Visit any of 100+ supported stores and we'll find coupon codes for you.</p>
+        <div class="popular-stores">
+          <h3>Popular Stores</h3>
+          <div class="store-chips" id="popularStores">
+            <span class="store-chip" data-store="amazon.com">Amazon</span>
+            <span class="store-chip" data-store="walmart.com">Walmart</span>
+            <span class="store-chip" data-store="target.com">Target</span>
+            <span class="store-chip" data-store="bestbuy.com">Best Buy</span>
+            <span class="store-chip" data-store="nike.com">Nike</span>
+            <span class="store-chip" data-store="sephora.com">Sephora</span>
+            <span class="store-chip" data-store="etsy.com">Etsy</span>
+            <span class="store-chip" data-store="homedepot.com">Home Depot</span>
+            <span class="store-chip" data-store="ebay.com">eBay</span>
+            <span class="store-chip" data-store="adidas.com">Adidas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Store Coupons View -->
+      <div id="storeView" style="display: none;">
+        <div class="store-header">
+          <div class="store-info">
+            <div class="store-name-wrapper">
+              <h2 id="storeName">Store Name</h2>
+              <span class="store-badge">🎯 You're here</span>
+            </div>
+            <p id="storeDomain" class="store-domain">domain.com</p>
+          </div>
+          <div class="store-actions">
+            <button class="icon-btn" id="refreshCouponsBtn" title="Refresh coupons">
+              <span>🔄</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Product Price Info -->
+        <div id="priceInfo" class="price-info-card" style="display: none;">
+          <div class="price-header">
+            <div class="price-product">
+              <span id="productTitle" class="product-title-sm"></span>
+            </div>
+            <div class="price-details">
+              <span class="current-price" id="currentPrice"></span>
+              <span class="price-trend" id="priceTrend"></span>
+            </div>
+          </div>
+          <div class="price-history-bar">
+            <span class="label">Price history:</span>
+            <span class="low-price" id="lowPrice"></span>
+            <span class="sep">→</span>
+            <span class="high-price" id="highPrice"></span>
+            <span class="sep">·</span>
+            <span class="change" id="priceChange"></span>
+          </div>
+          <button class="link-btn" id="setAlertBtn">🔔 Set price drop alert</button>
+        </div>
+
+        <!-- Coupons List -->
+        <div class="coupons-section">
+          <div class="section-header">
+            <h3>Available Coupons</h3>
+            <span class="coupon-count" id="couponCount">0 found</span>
+          </div>
+          <div id="couponsList" class="coupons-list">
+            <!-- Coupon cards injected here -->
+          </div>
+          <div id="noCoupons" class="empty-state" style="display: none;">
+            <div class="empty-icon">🔍</div>
+            <p>No coupons found for this store yet.</p>
+            <p class="text-muted">We're constantly adding new deals!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transparency Footer -->
+    <footer id="footer">
+      <div class="transparency-banner">
+        <div class="transparency-header">
+          <span class="badge badge-green">💚 Transparent</span>
+          <button class="link-btn-sm" id="dashboardBtn">Dashboard</button>
+        </div>
+        <p class="transparency-text">
+          How we make money: We earn a small commission if you buy after clicking a deal link. 
+          <strong>You pay nothing extra. Ever.</strong> 
+          We never modify or hijack existing affiliate links.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Dashboard Modal -->
+    <div id="dashboardModal" class="modal-overlay" style="display: none;">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>Transparency Dashboard</h2>
+          <button class="modal-close" id="dashboardClose">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="dashboard-stats">
+            <div class="stat-card">
+              <div class="stat-icon">💰</div>
+              <div class="stat-value" id="statUserSavings">$0.00</div>
+              <div class="stat-label">Your Total Savings</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">🏢</div>
+              <div class="stat-value" id="statCommissions">$0.00</div>
+              <div class="stat-label">We Earned (Commissions)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">📊</div>
+              <div class="stat-value" id="statStores">0</div>
+              <div class="stat-label">Stores Supported</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">🏷️</div>
+              <div class="stat-value" id="statCoupons">0</div>
+              <div class="stat-label">Active Coupons</div>
+            </div>
+          </div>
+          <div class="dashboard-disclosure">
+            <h3>How We Make Money</h3>
+            <p>When you click an affiliate link in our extension and make a purchase, the store pays us a small commission (typically 1-10% of the sale). <strong>This does NOT increase the price you pay.</strong></p>
+            <p>We never:</p>
+            <ul>
+              <li>❌ Hijack or replace existing affiliate links</li>
+              <li>❌ Sell your browsing data</li>
+              <li>❌ Show paid placements without disclosure</li>
+              <li>❌ Use dark patterns or deceptive UI</li>
+            </ul>
+            <p>Our code is <a href="#" id="githubLink">open source</a>. Everyone can verify exactly what we do.</p>
+          </div>
+          <div class="recent-activity">
+            <h3>Recent Activity</h3>
+            <div id="recentActivity">
+              <p class="text-muted">No activity yet. Start shopping to see your savings!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Panel -->
+    <div id="settingsPanel" class="settings-dropdown" style="display: none;">
+      <div class="settings-item">
+        <label class="toggle-label">
+          <span>Auto-apply coupons</span>
+          <input type="checkbox" id="autoApplyToggle" checked>
+          <span class="toggle-switch"></span>
+        </label>
+      </div>
+      <div class="settings-item">
+        <label class="toggle-label">
+          <span>Price drop alerts</span>
+          <input type="checkbox" id="priceAlertsToggle" checked>
+          <span class="toggle-switch"></span>
+        </label>
+      </div>
+      <div class="settings-item">
+        <label class="toggle-label">
+          <span>Show badge on cart pages</span>
+          <input type="checkbox" id="badgeToggle" checked>
+          <span class="toggle-switch"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <script src="../lib/coupon-engine.js"></script>
+  <script src="../lib/price-history.js"></script>
+  <script src="../lib/affiliate.js"></script>
+  <script src="../lib/themes.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+/* auto-apply.css - Floating badge styles for coupon auto-apply feature */
+
+.transparent-coupon-badge {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2147483647;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  max-width: 360px;
+  animation: tc-slide-up 0.3s ease-out;
+  pointer-events: auto;
+}
+
+.transparent-coupon-badge * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes tc-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tc-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(0, 168, 150, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 24px rgba(0, 168, 150, 0.5);
+  }
+}
+
+.tc-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(0, 168, 150, 0.2);
+  animation: tc-pulse 2s ease-in-out infinite;
+}
+
+.tc-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.tc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tc-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #1a2332;
+}
+
+.tc-logo-icon {
+  width: 22px;
+  height: 22px;
+  background: #00a896;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.tc-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #8a9aaa;
+  font-size: 18px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+  transition: background 0.15s;
+}
+
+.tc-close:hover {
+  background: #f0f3f7;
+  color: #1a2332;
+}
+
+.tc-coupon {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+.tc-discount-badge {
+  background: linear-gradient(135deg, #00a896, #02c39a);
+  color: white;
+  font-weight: 800;
+  font-size: 18px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 65px;
+  text-align: center;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.tc-discount-badge small {
+  font-size: 11px;
+  font-weight: 500;
+  display: block;
+  opacity: 0.9;
+}
+
+.tc-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.tc-desc {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a2332;
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+
+.tc-store {
+  font-size: 11px;
+  color: #5a6a7e;
+  margin-bottom: 4px;
+}
+
+.tc-expiry {
+  font-size: 10px;
+  color: #8a9aa9;
+}
+
+.tc-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.tc-btn {
+  flex: 1;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.tc-btn-primary {
+  background: #00a896;
+  color: white;
+}
+
+.tc-btn-primary:hover {
+  background: #008f7f;
+  transform: scale(1.02);
+}
+
+.tc-btn-primary:active {
+  transform: scale(0.98);
+}
+
+.tc-btn-secondary {
+  background: #f0f3f7;
+  color: #1a2332;
+}
+
+.tc-btn-secondary:hover {
+  background: #e1e8ed;
+}
+
+.tc-btn-success {
+  background: #2ecc71;
+  color: white;
+}
+
+.tc-btn-copied {
+  background: #27ae60;
+  color: white;
+}
+
+.tc-disclosure {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f3f7;
+  font-size: 10px;
+  color: #8a9aa9;
+  line-height: 1.4;
+}
+
+.tc-disclosure a {
+  color: #0077b6;
+  text-decoration: none;
+}
+
+.tc-disclosure a:hover {
+  text-decoration: underline;
+}
+
+.tc-dismiss {
+  text-align: center;
+  margin-top: 6px;
+}
+
+.tc-dismiss button {
+  background: none;
+  border: none;
+  color: #8a9aa9;
+  font-size: 11px;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 4px 8px;
+}
+
+.tc-dismiss button:hover {
+  color: #5a6a7e;
+}
+
+/* Success animation */
+@keyframes tc-success-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.tc-success-animation {
+  animation: tc-success-pop 0.3s ease;
+}
+
+/* Minimized state */
+.tc-minimized {
+  background: #00a896;
+  color: white;
+  border-radius: 50px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 168, 150, 0.4);
+}
+
+.tc-minimized:hover {
+  transform: scale(1.05);
+}
+
+.tc-minimized-dot {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  animation: tc-pulse-dot 1.5s infinite;
+}
+
+@keyframes tc-pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Inline coupon bar for cart pages */
+.tc-inline-bar {
+  position: relative;
+  margin: 12px 0;
+  padding: 12px 16px;
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.tc-inline-bar .tc-code {
+  font-weight: 800;
+  color: #2e7d32;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.tc-inline-bar .tc-apply-now {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.tc-inline-bar .tc-apply-now:hover {
+  background: #1b5e20;
+}
+
+/* Dark mode support via prefers-color-scheme */
+@media (prefers-color-scheme: dark) {
+  .tc-card {
+    background: #1c2333;
+    border-color: rgba(2, 195, 154, 0.3);
+  }
+  
+  .tc-logo {
+    color: #e6edf3;
+  }
+  
+  .tc-desc {
+    color: #e6edf3;
+  }
+  
+  .tc-store {
+    color: #8b96a8;
+  }
+  
+  .tc-close:hover {
+    background: #252d3d;
+    color: #e6edf3;
+  }
+  
+  .tc-btn-secondary {
+    background: #252d3d;
+    color: #e6edf3;
+  }
+  
+  .tc-btn-secondary:hover {
+    background: #30363d;
+  }
+  
+  .tc-disclosure {
+    border-top-color: #30363d;
+    color: #6e7b8d;
+  }
+  
+  .tc-inline-bar {
+    background: #1a3a2a;
+    border-color: #3fb950;
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "Transparent Coupon — Honest Deals",
+  "version": "1.0.0",
+  "description": "Privacy-first, ethical coupon finder. Auto-applies coupons, tracks price history, and is 100% transparent about how we make money. No affiliate hijacking. Ever.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "clipboardWrite",
+    "alarms"
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "https://api.gadgethumans.com/*",
+    "https://api.coupon-partner.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": [
+        "src/lib/store-detector.js",
+        "src/content/cart-check.js",
+        "src/content/auto-apply.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "Transparent Coupon",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background/service-worker.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/content/auto-apply.css",
+        "icons/*",
+        "src/lib/coupon-engine.js",
+        "src/lib/affiliate.js",
+        "src/lib/price-history.js",
+        "src/lib/themes.js"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
